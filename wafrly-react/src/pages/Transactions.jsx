@@ -112,7 +112,7 @@ const Transactions = () => {
             const response = await fetch('https://api.ocr.space/parse/image', {
                 method: 'POST',
                 headers: {
-                    'apikey': 'Kasd059asd88957'
+                    'apikey': 'K89305957388957' // Updated to the real API key
                 },
                 body: formData
             });

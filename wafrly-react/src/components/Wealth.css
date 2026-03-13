@@ -1,0 +1,443 @@
+.wealth-section {
+    background-color: #f9fafb;
+    /* Light sleek theme */
+    padding: 120px 40px;
+    width: 100%;
+    color: #000000;
+}
+
+.wealth-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.wealth-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    color: #111827;
+}
+
+.wealth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wealth-sub-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.wealth-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    flex: 1;
+}
+
+.wealth-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 32px;
+    padding: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+}
+
+.wealth-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.card-header {
+    margin-bottom: 32px;
+}
+
+.wealth-card h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #111827;
+}
+
+.wealth-card p {
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+/* Card 1: All your money */
+.main-balance-chart {
+    position: relative;
+    height: 200px;
+    margin-bottom: 40px;
+}
+
+.balance-info {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.total-balance {
+    font-size: 32px;
+    font-weight: 800;
+    color: #111827;
+    margin: 4px 0;
+}
+
+.balance-label {
+    font-size: 12px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.trend {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+.trend.pos,
+.ticker-badge.pos {
+    color: #16a34a;
+    background: rgba(22, 163, 74, 0.1);
+}
+
+.trend.neg,
+.ticker-badge.neg {
+    color: #dc2626;
+    background: rgba(220, 38, 38, 0.1);
+}
+
+.main-svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-path {
+    stroke: #4ade80;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 600;
+    /* Total length of the SVG path */
+    stroke-dashoffset: 600;
+    animation: drawWealthLine 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes drawWealthLine {
+    0% {
+        stroke-dashoffset: 600;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.chart-point {
+    fill: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
+    opacity: 0;
+    animation: popWealthPoint 4s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+}
+
+@keyframes popWealthPoint {
+
+    0%,
+    75% {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    90%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.accounts-list {
+    margin-top: auto;
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 16px;
+    letter-spacing: 0.1em;
+}
+
+.account-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.acc-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.acc-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.coinbase {
+    background: #0052cc;
+}
+
+.vanguard {
+    background: #a62626;
+}
+
+.wealthfront {
+    background: #4a154b;
+}
+
+.acc-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #111827;
+}
+
+.acc-time {
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+.acc-stats {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+}
+
+.acc-value {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* Card 2: Live Performance */
+.ticker-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.ticker-item {
+    background: #fdfdfd;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ticker-name {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.ticker-name span {
+    font-size: 11px;
+    color: #9ca3af;
+    font-weight: 400;
+    display: block;
+}
+
+.sparkline {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 12px;
+    overflow: visible;
+}
+
+.spark-pos {
+    stroke: #4ade80;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 150;
+    /* Estimated sparkline width */
+    stroke-dashoffset: 150;
+    animation: drawSparkline 2.5s ease-in-out infinite alternate;
+}
+
+.spark-neg {
+    stroke: #f87171;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 150;
+    stroke-dashoffset: 150;
+    animation: drawSparkline 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes drawSparkline {
+    0% {
+        stroke-dashoffset: 150;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.ticker-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 100px;
+}
+
+/* Card 3: Allocation */
+.alloc-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.alloc-label {
+    font-size: 13px;
+    font-weight: 600;
+    width: 60px;
+}
+
+.alloc-bar-container {
+    flex: 1;
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 100px;
+    margin-left: 16px;
+    overflow: hidden;
+}
+
+.alloc-bar {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 100px;
+    transform-origin: left;
+    animation: loadAllocBar 3s cubic-bezier(0.18, 0.89, 0.32, 1.28) infinite alternate;
+}
+
+@keyframes loadAllocBar {
+
+    0%,
+    20% {
+        transform: scaleX(0);
+    }
+
+    80%,
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+/* Card 4: Real Estate */
+.card-real-estate {
+    background: #ffffff;
+}
+
+.zillow-mockup {
+    margin-top: auto;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 16px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.zillow-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #9ca3af;
+    margin-bottom: 32px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.zillow-icon {
+    width: 48px;
+    height: 48px;
+    background: #006aff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.zillow-icon span {
+    display: none;
+}
+
+/* just showing the Z */
+
+.zillow-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #111827;
+}
+
+@media (max-width: 1024px) {
+    .wealth-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .wealth-bottom-row {
+        grid-template-columns: 1fr;
+    }
+
+    .ticker-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}

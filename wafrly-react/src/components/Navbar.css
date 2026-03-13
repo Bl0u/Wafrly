@@ -1,0 +1,174 @@
+.premium-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: background-color 0.35s ease, backdrop-filter 0.35s ease, border-color 0.35s ease;
+    will-change: background-color, border-color;
+}
+
+/* Nav Pills Wrapper Defaults */
+.nav-pill {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 0;
+    transform: translateY(0);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background-color, border-radius, padding, box-shadow;
+}
+
+.nav-pill-left {
+    gap: 40px;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.text-logo {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #000000;
+    transition: color 0.35s ease;
+}
+
+.brand-icon-nav {
+    color: #000000;
+    transition: color 0.35s ease;
+}
+
+/* Middle Links */
+.main-nav-links {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #444444;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.35s ease;
+    cursor: pointer;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #000000;
+}
+
+/* Auth Buttons */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.login-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    transition: color 0.35s ease, opacity 0.35s ease;
+}
+
+.signup-btn {
+    padding: 10px 20px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.35s ease;
+}
+
+.signup-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+/* Split Pill Scrolled State */
+.premium-navbar.scrolled {
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-bottom-color: transparent;
+    pointer-events: none;
+    /* Let clicks pass through empty space */
+}
+
+/* The Pills themselves in scrolled state */
+.premium-navbar.scrolled .nav-pill {
+    pointer-events: auto;
+    background: #030712;
+    /* Dark theme pill */
+    border-color: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(12px);
+    /* Hardware accelerated move down */
+}
+
+.premium-navbar.scrolled .nav-pill-left {
+    padding: 8px 24px 8px 12px;
+    gap: 32px;
+}
+
+.premium-navbar.scrolled .nav-pill-right {
+    padding: 8px;
+}
+
+/* Inverse styling for dark pill contents */
+.premium-navbar.scrolled .text-logo,
+.premium-navbar.scrolled .brand-icon-nav {
+    color: #ffffff;
+}
+
+/* Logo icon gets a lighter background box in dark mode to mirror picture */
+.premium-navbar.scrolled .logo-container {
+    background: #1f2937;
+    padding: 8px 12px;
+    border-radius: 100px;
+}
+
+.premium-navbar.scrolled .nav-link {
+    color: #9ca3af;
+}
+
+.premium-navbar.scrolled .nav-link:hover {
+    color: #ffffff;
+}
+
+.premium-navbar.scrolled .login-btn {
+    color: #ffffff;
+}
+
+.premium-navbar.scrolled .signup-btn {
+    background: #ffffff;
+    color: #000000;
+}

@@ -1,0 +1,287 @@
+.transactions-page {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+}
+
+.transactions-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 24px;
+}
+
+.browse-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.browse-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.browse-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.store-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 200px;
+    max-height: 480px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.empty-state {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-align: center;
+    padding: 40px 0;
+    font-style: italic;
+}
+
+.store-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+}
+
+.store-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.item-details {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(45, 212, 191, 0.05);
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    border-radius: 8px;
+    padding: 2px 4px;
+}
+
+.ocr-btn {
+    background: rgba(77, 255, 201, 0.1);
+    border: 1px solid rgba(77, 255, 201, 0.2);
+    color: var(--accent-mint);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ocr-btn:hover:not(:disabled) {
+    background: rgba(77, 255, 201, 0.2);
+    border-color: var(--accent-mint);
+    transform: translateY(-1px);
+}
+
+.ocr-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.item-icon {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.item-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.item-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.item-price {
+    font-weight: 700;
+    color: var(--accent-mint);
+}
+
+/* Form Styles */
+.add-product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.styled-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.styled-input:focus {
+    outline: none;
+    border-color: var(--accent-mint);
+}
+
+.add-btn {
+    background: var(--accent-mint);
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.add-btn:hover {
+    opacity: 0.9;
+}
+
+/* Category Slider Styles */
+.category-slider {
+    display: flex;
+    overflow-x: auto;
+    gap: 8px;
+    align-items: center;
+    padding-bottom: 8px;
+    /* Room for the horizontal scrollbar */
+}
+
+.category-slider::-webkit-scrollbar {
+    height: 6px;
+}
+
+.category-pill {
+    white-space: nowrap;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.category-pill:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+}
+
+.category-pill.active {
+    background: var(--accent-mint);
+    color: #000;
+    border-color: var(--accent-mint);
+}
+
+/* Scrollbar Styles */
+.cart-items-container::-webkit-scrollbar,
+.category-slider::-webkit-scrollbar,
+.store-grid::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    /* For horizontal scrollbars like the category slider */
+}
+
+.cart-items-container::-webkit-scrollbar-track,
+.category-slider::-webkit-scrollbar-track,
+.store-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 4px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb,
+.category-slider::-webkit-scrollbar-thumb,
+.store-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb:hover,
+.category-slider::-webkit-scrollbar-thumb:hover,
+.store-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Cart Item Small Image Styles */
+.cart-item-img-small {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.cart-item-icon-small {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}

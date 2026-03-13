@@ -1,0 +1,107 @@
+.analytics-page {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.analytics-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.large-chart {
+    height: 300px;
+    width: 100%;
+}
+
+.mock-chart-large .chart-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 3s ease-in-out forwards;
+}
+
+.mock-chart-large .chart-fill {
+    opacity: 0;
+    animation: fadeInHalf 1s ease forwards 1s;
+    /* Delay fill until line draws a bit */
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fadeInHalf {
+    to {
+        opacity: 0.8;
+    }
+}
+
+.allocation-bars .progress-bar-container {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Receipt Table Styles */
+.receipts-table-container {
+    overflow-x: auto;
+}
+
+.receipts-table th {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.view-btn {
+    background: transparent;
+    cursor: pointer;
+    line-height: 1;
+    color: #ffffff;
+}
+
+/* Back Button */
+.back-arrow-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.back-arrow-btn:hover {
+    background: rgba(45, 212, 191, 0.1);
+    border-color: var(--accent-mint);
+    color: var(--accent-mint);
+    transform: translateX(-2px);
+}
+
+/* Receipt Item Image */
+.receipt-item-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.receipt-item-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}

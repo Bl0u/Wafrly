@@ -1,0 +1,215 @@
+.pricing-container {
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 24px 80px;
+    color: var(--text-primary);
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.pricing-title {
+    font-size: 64px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    margin-bottom: 16px;
+}
+
+.pricing-subtitle {
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* Toggle Styling */
+.billing-toggle-container {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: center;
+}
+
+.billing-toggle {
+    position: relative;
+    display: flex;
+    padding: 4px;
+    border-radius: 100px;
+    width: 192px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 94px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-btn {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.toggle-btn.active {
+    color: var(--text-primary);
+}
+
+.save-tag {
+    background: var(--accent-mint);
+    color: #000;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.05em;
+}
+
+/* Pricing Cards */
+.pricing-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.pricing-card {
+    flex: 1;
+    min-width: 260px;
+    padding: 24px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    color: #000000;
+    /* Force GPU layer and optimize rendering for 3D transforms */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.5s ease;
+    opacity: 0;
+}
+
+.pricing-card.animate-left {
+    transform: perspective(1200px) translateX(60px) translateY(100px) rotateY(-360deg) rotate(-10deg) scale(0.6);
+}
+
+.pricing-card.animate-right {
+    transform: perspective(1200px) translateX(-60px) translateY(100px) rotateY(360deg) rotate(10deg) scale(0.6);
+}
+
+.pricing-card.in-view {
+    opacity: 1;
+    transform: perspective(1200px) translateX(0) translateY(0) rotateY(0deg) rotate(0deg) scale(1);
+}
+
+.pricing-card.liquid-glass:hover {
+    background: #ffffff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 800px) {
+    .pricing-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pricing-card {
+        min-width: 100%;
+    }
+}
+
+.plan-name {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #666666;
+    margin-bottom: 24px;
+}
+
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.currency {
+    font-size: 32px;
+    font-weight: 700;
+    color: #000000;
+}
+
+.amount {
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: #000000;
+}
+
+.period {
+    font-size: 16px;
+    color: #666666;
+}
+
+.billing-note {
+    font-size: 14px;
+    color: #666666;
+    margin-top: 8px;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #000000;
+}
+
+.check {
+    color: var(--accent-mint);
+    font-weight: 700;
+}
+
+.start-btn {
+    width: 100%;
+    padding: 14px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-top: auto;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}

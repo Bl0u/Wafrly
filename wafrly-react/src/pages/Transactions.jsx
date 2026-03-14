@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import './Transactions.css';
 
 const Transactions = () => {
@@ -14,6 +16,7 @@ const Transactions = () => {
     const [activeCategory, setActiveCategory] = useState({ name: 'All', id: null });
     const [searchQuery, setSearchQuery] = useState('');
     const [isOCRProcessing, setIsOCRProcessing] = useState(false);
+    const [isAIProcessing, setIsAIProcessing] = useState(false);
     const [ocrResultText, setOcrResultText] = useState('');
     const [showOcrModal, setShowOcrModal] = useState(false);
 
@@ -106,36 +109,39 @@ const Transactions = () => {
 
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('isTable', 'true'); // Recommended for receipts and tables
 
         try {
-            const response = await fetch('https://api.ocr.space/parse/image', {
+            const response = await fetch('http://127.0.0.1:5000/api/upload-receipt', {
                 method: 'POST',
-                headers: {
-                    'apikey': 'K89305957388957' // Updated to the real API key
-                },
                 body: formData
             });
 
             const data = await response.json();
 
-            if (data.IsErroredOnProcessing) {
-                setOcrResultText('OCR Processing Error:\n' + (data.ErrorMessage || 'Unknown error occurred.'));
+            if (!response.ok) {
+                setOcrResultText('Server Error:\n' + (data.message || 'Failed to process receipt.'));
+                setShowOcrModal(true);
             } else {
-                const results = data.ParsedResults;
-                if (results && results.length > 0) {
-                    setOcrResultText(results[0].ParsedText || 'API returned no text.');
-                } else {
-                    setOcrResultText('No text detected in the image.');
+                // Show the raw text momentarily or just skip to AI
+                setOcrResultText(data.rawText || 'No text detected.');
+                setShowOcrModal(true);
+                
+                if (data.aiResponse) {
+                    setIsAIProcessing(true);
+                    // Minimal delay to show the transition
+                    setTimeout(() => {
+                        setOcrResultText(data.aiResponse);
+                        setIsAIProcessing(false);
+                    }, 500);
                 }
             }
         } catch (error) {
-            console.error('OCR fetch error:', error);
-            setOcrResultText('Failed to connect to the OCR service.');
+            console.error('Processing error:', error);
+            setOcrResultText('Failed to connect to the backend server. Make sure it is running on port 5000.');
+            setShowOcrModal(true);
         } finally {
             setIsOCRProcessing(false);
-            setShowOcrModal(true); // Open the modal window
-            e.target.value = null; // Reset input field to allow re-uploading the same file
+            e.target.value = null;
         }
     };
 
@@ -353,15 +359,19 @@ const Transactions = () => {
                         display: 'flex', flexDirection: 'column', gap: '16px'
                     }}>
                         <div className="flex justify-between items-center border-b border-white/10 pb-4">
-                            <h2 className="text-xl font-bold text-white" style={{ fontSize: '1.25rem', margin: 0 }}>OCR Scan Result</h2>
+                            <h2 className="text-xl font-bold text-white" style={{ fontSize: '1.25rem', margin: 0 }}>
+                                {isAIProcessing ? '🤖 Enhancing with AI...' : '📋 Receipt Analysis'}
+                            </h2>
                             <button onClick={() => setShowOcrModal(false)} className="text-gray-400 hover:text-white" style={{ background: 'transparent', border: 'none', cursor: 'pointer', fontSize: '1.5rem', lineHeight: '1', padding: 0 }}>&times;</button>
                         </div>
-                        <div style={{
+                        <div className="ocr-markdown-container" style={{
                             flex: 1, overflowY: 'auto', backgroundColor: 'rgba(0,0,0,0.3)',
-                            padding: '16px', borderRadius: '8px', whiteSpace: 'pre-wrap', color: '#e5e7eb',
-                            fontFamily: 'monospace', fontSize: '14px'
+                            padding: '16px', borderRadius: '8px', color: '#e5e7eb',
+                            fontSize: '14px'
                         }}>
-                            {ocrResultText}
+                            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                {ocrResultText}
+                            </ReactMarkdown>
                         </div>
                         <button className="add-btn mt-2" onClick={() => setShowOcrModal(false)}>Close Window</button>
                     </div>

@@ -276,12 +276,53 @@
 }
 
 .cart-item-icon-small {
-    width: 32px;
-    height: 32px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
 }
+
+/* Markdown and Results Modal Styling */
+.ocr-markdown-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.ocr-markdown-container th {
+    background: rgba(45, 212, 191, 0.15);
+    color: var(--accent-mint);
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+}
+
+.ocr-markdown-container td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+}
+
+.ocr-markdown-container tr:last-child td {
+    border-bottom: none;
+}
+
+.ocr-markdown-container tr:hover td {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.ocr-markdown-container p {
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.ocr-markdown-container strong {
+    color: var(--accent-mint);
+}

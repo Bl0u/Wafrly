@@ -145,11 +145,71 @@ const Transactions = () => {
         }
     };
 
+    const parseReceiptTable = (markdown) => {
+        const lines = markdown.split('\n');
+        const items = [];
+        
+        let tableStarted = false;
+        for (const line of lines) {
+            if (line.includes('|') && line.toLowerCase().includes('product')) {
+                tableStarted = true;
+                continue;
+            }
+            if (tableStarted && line.includes('|') && !line.includes('---')) {
+                const parts = line.split('|').map(p => p.trim()).filter(p => p !== '');
+                if (parts.length >= 3) {
+                    const name = parts[0];
+                    const quantity = parseInt(parts[1], 10) || 1;
+                    const priceRaw = parts[2].replace(/[^\d.]/g, '');
+                    const price = parseFloat(priceRaw) || 0;
+                    
+                    if (name && name.toLowerCase() !== 'product' && !isNaN(price)) {
+                        items.push({
+                            id: Date.now() + Math.random(),
+                            name,
+                            price,
+                            quantity,
+                            totalPrice: price * quantity,
+                            imageCover: ''
+                        });
+                    }
+                }
+            }
+        }
+        return items;
+    };
+
+    const handleReceiptSubmit = () => {
+        const parsedItems = parseReceiptTable(ocrResultText);
+        
+        if (parsedItems.length === 0) {
+            alert('No valid items found in the receipt analysis. Please try again or add manually.');
+            return;
+        }
+
+        setCartItems(prev => [...prev, ...parsedItems]);
+
+        const userName = localStorage.getItem('wafrly_user_name') || 'John Doe';
+        const existingOrders = JSON.parse(localStorage.getItem(`wafrly_orders_${userName}`)) || [];
+        
+        const newOrder = {
+            orderId: Date.now(),
+            date: new Date().toISOString(),
+            items: parsedItems,
+            total: parsedItems.reduce((sum, item) => sum + item.totalPrice, 0)
+        };
+
+        localStorage.setItem(`wafrly_orders_${userName}`, JSON.stringify([...existingOrders, newOrder]));
+
+        setShowOcrModal(false);
+        alert(`Successfully added ${parsedItems.length} items to your cart and history!`);
+    };
+
     const handleSubmitOrder = () => {
         if (cartItems.length === 0) return;
 
         // Save the submitted items to the user's specific local storage
-        const userName = localStorage.getItem('wafrly_user_name') || 'Guest';
+        const userName = localStorage.getItem('wafrly_user_name') || 'John Doe';
         const existingOrders = JSON.parse(localStorage.getItem(`wafrly_orders_${userName}`)) || [];
 
         const newOrder = {
@@ -373,7 +433,22 @@ const Transactions = () => {
                                 {ocrResultText}
                             </ReactMarkdown>
                         </div>
-                        <button className="add-btn mt-2" onClick={() => setShowOcrModal(false)}>Close Window</button>
+                        <div className="flex gap-4 mt-2">
+                            <button 
+                                className="add-btn flex-1" 
+                                onClick={handleReceiptSubmit}
+                                style={{ background: 'var(--accent-mint)', color: '#000' }}
+                            >
+                                Submit to Cart & History
+                            </button>
+                            <button 
+                                className="add-btn flex-1" 
+                                onClick={() => setShowOcrModal(false)}
+                                style={{ background: 'rgba(255,255,255,0.1)' }}
+                            >
+                                Close Window
+                            </button>
+                        </div>
                     </div>
                 </div>
             )}

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -22,8 +23,8 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 // Initialize Gemini AI
-const genAI = new GoogleGenerativeAI("AIzaSyBJuySm_kHGM6ympYq8dN1_gLyYmxqG6GQ");
-const OCR_API_KEY = "K89305957388957";
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const OCR_API_KEY = process.env.OCR_API_KEY;
 
 // In-memory array for minimal backend setup
 // In a real app, use a database like PostgreSQL or MongoDB

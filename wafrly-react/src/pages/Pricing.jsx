@@ -55,7 +55,7 @@ const Pricing = () => {
                             Annual
                         </button>
                     </div>
-                    <span className="save-tag">SAVE 39%</span>
+                    {isAnnual && <span className="save-tag">SAVE 39%</span>}
                 </div>
             </div>
 

@@ -47,9 +47,14 @@ const Overview = () => {
                     <h1 className="overview-title">Welcome back, {firstName}</h1>
                     <p className="overview-subtitle">Here is what's happening with your money today.</p>
                 </div>
-                <button className="premium-btn">
-                    <span>+ Add Account</span>
-                </button>
+                <div className="flex gap-4">
+                    <button className="premium-btn" onClick={() => navigate('/dashboard/what-if')}>
+                        <span>What If ✨</span>
+                    </button>
+                    <button className="premium-btn" onClick={() => navigate('/dashboard/generate-report')}>
+                        <span>generate report</span>
+                    </button>
+                </div>
             </header>
 
             <div className="overview-grid">

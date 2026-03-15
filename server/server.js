@@ -154,15 +154,17 @@ You are an expert receipt parser. Your goal is to take raw, messy OCR text from 
 "${rawText}"
 
 **Task:**
-1. Correct any OCR spelling errors (e.g., "S1arbucks" -> "Starbucks").
-2. Extract the product name, quantity, and unit price.
-3. Categorize each item into one of three categories:
-   - **Essential**: Basic needs (bread, milk, rent, medicine).
-   - **Necessary**: Required for work or lifestyle but not basic survival (internet, professional tools, basic clothing).
-   - **Discretionary**: Non-essential/Luxury (coffee, electronics, dining out, entertainment).
+1. Identify the **Store Name** (Seller) from the receipt header (e.g., "Starbucks", "Walmart", "Zara").
+2. Correct any OCR spelling errors (e.g., "S1arbucks" -> "Starbucks").
+3. Extract the product name, quantity, and unit price.
+4. Categorize each item into one of ONLY two categories:
+   - **Essential**: Basic needs, survival, or required for work/life (bread, milk, medicine, utilities, basic clothing).
+   - **Discretionary**: Non-essential, luxury, or entertainment (coffee, electronics, dining out, cinema).
+Do NOT use any other categories. Use exactly these strings.
 
 **Output Format:**
-Return ONLY a markdown table with the following columns:
+Return the Store Name on the first line, followed by a markdown table with the following columns:
+Store: [Store Name]
 | Product | Count | Price for each (EGP) | Category |
 
 If a value is missing or unclear, make your best guess based on the context of the receipt. If there are no clear products in the text, respond with "No products could be extracted from the provided text."

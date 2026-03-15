@@ -11,6 +11,8 @@ import MyCards from './pages/MyCards';
 import Analytics from './pages/Analytics';
 import Profile from './pages/Profile';
 import RecentTransactions from './pages/RecentTransactions';
+import GenerateReport from './pages/GenerateReport';
+import WhatIf from './pages/WhatIf';
 
 function App() {
   const location = useLocation();
@@ -49,6 +51,8 @@ function App() {
           <Route path="transactions" element={<Transactions />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="recent-transactions" element={<RecentTransactions />} />
+          <Route path="generate-report" element={<GenerateReport />} />
+          <Route path="what-if" element={<WhatIf />} />
           <Route path="cards" element={<MyCards />} />
           <Route path="profile" element={<Profile />} />
           {/* Add more nested dashboard routes here later */}

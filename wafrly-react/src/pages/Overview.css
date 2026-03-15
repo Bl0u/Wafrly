@@ -247,3 +247,8 @@
 .tx-amount.negative {
     color: var(--text-primary);
 }
+
+.overview-header .flex {
+    display: flex;
+    gap: 16px;
+}

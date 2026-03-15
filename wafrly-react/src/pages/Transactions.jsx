@@ -87,7 +87,9 @@ const Transactions = () => {
             price: parseFloat(productPrice),
             quantity: parseInt(productQuantity, 10),
             totalPrice: parseFloat(productPrice) * parseInt(productQuantity, 10),
-            imageCover: productImage // Will be set when clicking a store item
+            imageCover: productImage,
+            category: ['Essential', 'Discretionary'].includes(activeCategory.name) ? activeCategory.name : 'Discretionary',
+            seller: 'Local Store' // Default seller for manual entries
         };
 
         setCartItems([...cartItems, newItem]);
@@ -148,6 +150,13 @@ const Transactions = () => {
     const parseReceiptTable = (markdown) => {
         const lines = markdown.split('\n');
         const items = [];
+        let storeName = 'Local Store';
+
+        // Check for Store Name in the first few lines
+        const storeLine = lines.find(line => line.toLowerCase().includes('store:'));
+        if (storeLine) {
+            storeName = storeLine.split(':')[1].trim().replace(/[[\]]/g, '');
+        }
         
         let tableStarted = false;
         for (const line of lines) {
@@ -157,11 +166,19 @@ const Transactions = () => {
             }
             if (tableStarted && line.includes('|') && !line.includes('---')) {
                 const parts = line.split('|').map(p => p.trim()).filter(p => p !== '');
-                if (parts.length >= 3) {
+                if (parts.length >= 4) { // Expect 4 columns now: Product | Count | Price | Category
                     const name = parts[0];
                     const quantity = parseInt(parts[1], 10) || 1;
                     const priceRaw = parts[2].replace(/[^\d.]/g, '');
                     const price = parseFloat(priceRaw) || 0;
+                    let category = parts[3] || 'Discretionary';
+                    
+                    // Normalize to Essential or Discretionary
+                    if (category.toLowerCase().includes('essential')) {
+                        category = 'Essential';
+                    } else {
+                        category = 'Discretionary';
+                    }
                     
                     if (name && name.toLowerCase() !== 'product' && !isNaN(price)) {
                         items.push({
@@ -170,7 +187,9 @@ const Transactions = () => {
                             price,
                             quantity,
                             totalPrice: price * quantity,
-                            imageCover: ''
+                            imageCover: '',
+                            category,
+                            seller: storeName
                         });
                     }
                 }
